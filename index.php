@@ -14,6 +14,8 @@ define('DB_NAME', 'newsSiteToplearn');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
 
+require_once 'api/database.php';
+$db = new database\Database;
 
 
 //helpers
