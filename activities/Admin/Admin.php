@@ -14,7 +14,7 @@ class Admin
         $this->base_path = BASE_PATH;
     }
 
-    protected function redirect($url)
+    public function redirect($url)
     {
         header('Location: ' . trim($this->current_domain, '/ ') . '/' . trim($url, '/ '));
         exit;
