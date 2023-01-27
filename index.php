@@ -14,11 +14,77 @@ define('DB_NAME', 'newsSiteToplearn');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
 
-require_once 'api/database.php';
+require_once 'database/database.php';
+require_once 'activities/Admin/Category.php';
+require_once 'activities/Admin/Admin.php';
 $db = new database\Database;
 
 
 //helpers
+
+
+//connecting to the database api
+function ReqAPI($url, $data)
+{
+    $opts = array(
+        'http' =>
+        array(
+            'method' => 'POST',
+            'header' => 'Content-type: application/x-www-form-urlencoded',
+            'content' => http_build_query($data)
+        )
+    );
+    $context = stream_context_create($opts);
+    $result = file_get_contents($url, false, $context);
+
+    echo $result;
+}
+
+
+//system routing reserved
+function uri($reserved_url, $class, $method, $request_method = 'GET')
+{
+
+    //current url array
+    $current_url = explode('?', currentUrl())[0];
+    $current_url = str_replace(CURRENT_DOMAIN, '', $current_url);
+    $current_url = trim($current_url, '/');
+    $current_url_array = explode('/', $current_url);
+    $current_url_array = array_filter($current_url_array);
+
+
+    //reserved url array
+    $reserved_url = trim($reserved_url, '/');
+    $reserved_url_array = explode('/', $reserved_url);
+    $reserved_url_array = array_filter($reserved_url_array);
+
+
+    //comparison reserved url array and current url array
+    if (sizeof($current_url_array) != sizeof($reserved_url_array) || methodField() != $request_method) {
+        return false;
+    }
+
+    $parameters = [];
+    for ($key = 0; $key < sizeof($current_url_array); $key++) {
+        if ($reserved_url_array[$key][0] == "{" && $reserved_url_array[$key][strlen($reserved_url_array[$key]) - 1] == "}") {
+            array_push($parameters, $current_url_array[$key]);
+        } elseif ($current_url_array[$key] !== $reserved_url_array[$key]) {
+            return false;
+        }
+    }
+
+    if (methodField() == 'POST') {
+        $request = isset($_FILES) ? array_merge($_POST, $_FILES) : $_POST;
+        $parameters = array_merge([$request], $parameters);
+    }
+
+    $object = new $class;
+    call_user_func_array(array($object, $method), $parameters);
+    exit();
+
+}
+
+
 
 //protocol http or https
 function protocol()
@@ -99,50 +165,6 @@ function flash($name, $value = null)
 }
 
 
-//system routing reserved
-function uri($reserved_url, $class, $method, $request_method = 'GET')
-{
-
-    //current url array
-    $current_url = explode('?', currentUrl())[0];
-    $current_url = str_replace(CURRENT_DOMAIN, '', $current_url);
-    $current_url = trim($current_url, '/');
-    $current_url_array = explode('/', $current_url);
-    $current_url_array = array_filter($current_url_array);
-
-
-    //reserved url array
-    $reserved_url = trim($reserved_url, '/');
-    $reserved_url_array = explode('/', $current_url);
-    $reserved_url_array = array_filter($current_url_array);
-
-
-    //comparison reserved url array and current url array
-    if (sizeof($reserved_url_array) !== sizeof($current_url_array) || methodField() !== $request_method) {
-        return false;
-    }
-
-    $parameters = [];
-    for ($key = 0; $key < sizeof($current_url_array); $key++) {
-        if ($reserved_url_array[$key][0] == "{" && $reserved_url_array[$key][strlen($reserved_url_array[$key]) - 1] == "}") {
-            array_push($parameters, $current_url_array[$key]);
-        } else if ($current_url_array[$key] !== $reserved_url_array[$key]) {
-            return false;
-        }
-    }
-
-    if (methodField() == 'POST') {
-        $request = isset($_FILES) ? array_merge($_POST, $_FILES) : $_POST;
-        $parameters = array_merge([$request], $parameters);
-    }
-
-    $object = new $class;
-    call_user_func_array(array($object, $method), $parameters);
-    exit();
-
-}
-
-
 //vardump and exit
 function dd($var)
 {
@@ -150,6 +172,18 @@ function dd($var)
     var_dump($var);
     exit;
 }
+
+
+//category
+//show one row
+// uri('admin/category/show/{id}', 'Admin\Category', 'show');
+uri('admin/category', 'Admin\Category', 'index');
+uri('admin/category/create', 'Admin\Category', 'create');
+uri('admin/category/store', 'Admin\Category', 'store', 'POST');
+uri('admin/category/edit/{id}', 'Admin\Category', 'edit');
+uri('admin/category/update/{id}', 'Admin\Category', 'update', 'POST');
+uri('admin/category/delete/{id}', 'Admin\Category', 'delete');
+echo "404 - page not found";
 
 
 
