@@ -20,36 +20,42 @@ class Admin
         exit;
     }
 
-    protected function redirect_back()
+    public function redirect_back()
     {
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         exit;
     }
 
-    protected function save_image($image, $image_path, $image_name = null)
+
+    public function saveImage($image, $imagePath, $imageName = null)
     {
-        $extension = explode('/', $image['type'][1]);
-        if ($image_name) {
-            $image_name = $image_name . '.' . $extension;
+
+        if ($imageName) {
+            $extension = explode('/', $image['type'])[1];
+            $imageName = $imageName . '.' . $extension;
         } else {
-            $image_name = date("Y-m-d-H-i-s") . '.' . $extension;
+            $extension = explode('/', $image['type'])[1];
+            $imageName = date("Y-m-d-H-i-s") . '.' . $extension;
         }
 
-        $image_temp = $image['tmp_name'];
-        $image_path = 'public/' . $image_path . '/';
-
-        if (is_uploaded_file($image_temp)) {
-            if (move_uploaded_file($image_temp, $image_path . $image_name)) {
-                return $image_path . $image_name;
+        $imageTemp = $image['tmp_name'];
+        $imagePath = 'public/' . $imagePath . '/';
+        
+        if (is_uploaded_file($imageTemp)) {
+            $full_image = $imagePath . $imageName;
+            if (move_uploaded_file($imageTemp, $full_image)) {
+                return $imagePath . $imageName;
             } else {
                 return false;
             }
         } else {
             return false;
         }
+
     }
 
-    protected function remove_image($path)
+
+    public function remove_image($path)
     {
         $path = trim($this->base_path, '/ ') . '/' . trim($path, '/ ');
         if (file_exists($path)) {
