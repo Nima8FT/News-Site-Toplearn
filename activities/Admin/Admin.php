@@ -29,35 +29,33 @@ class Admin
 
     public function saveImage($image, $imagePath, $imageName = null)
     {
-
+        $home_url = '../';
+        $format_img = explode('.', $image['name']);
+        $format_img = end($format_img);
         if ($imageName) {
-            $extension = explode('/', $image['type'])[1];
-            $imageName = $imageName . '.' . $extension;
+            $imageName = $imageName . '.' . $format_img;
         } else {
-            $extension = explode('/', $image['type'])[1];
-            $imageName = date("Y-m-d-H-i-s") . '.' . $extension;
+            $imageName = date("Y-m-d-H-i-s") . '.' . $format_img;
         }
 
-        $imageTemp = $image['tmp_name'];
-        $imagePath = 'public/' . $imagePath . '/';
-        
-        if (is_uploaded_file($imageTemp)) {
-            $full_image = $imagePath . $imageName;
-            if (move_uploaded_file($imageTemp, $full_image)) {
-                return $imagePath . $imageName;
+        $img_temp = $image['tmp_name'];
+        $img_dir = 'public/' . $imagePath . $imageName;
+
+        if (is_uploaded_file($img_temp)) {
+            if (move_uploaded_file($img_temp, $home_url . $img_dir)) {
+                return $img_dir;
             } else {
                 return false;
             }
         } else {
             return false;
         }
-
     }
 
 
     public function remove_image($path)
     {
-        $path = trim($this->base_path, '/ ') . '/' . trim($path, '/ ');
+        $path = trim($this->current_domain, '/ ') . '/' . trim($path, '/ ');
         if (file_exists($path)) {
             unlink($path);
         }

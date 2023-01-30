@@ -47,24 +47,67 @@ class Post
     public function edit($id)
     {
         $db = new Database();
-        $categories = $db->select('SELECT * FROM categories WHERE id = ?;', [$id])->fetch();
-        require_once(BASE_PATH . '/template/admin/categories/edit.php');
+        $post = $db->select('SELECT * FROM posts WHERE id = ?;', [$id])->fetch();
+        $categories = $db->select('SELECT * FROM categories ORDER BY `id` DESC');
+        require_once(BASE_PATH . '/template/admin/posts/edit.php');
     }
 
     public function update($request, $id)
     {
+        $real_time_stamp = substr($request['published_at'], 0, 10);
+        $request['published_at'] = date("Y-m-d H:i:s", (int) $real_time_stamp);
         $db = new Database();
-        $db->update('categories', $id, array_keys($request), $request);
         $admin = new Admin();
-        $admin->redirect('admin/category');
+        if ($request['cat_id'] != null) {
+            if ($request['image']['tmp_name'] !== null) {
+                $post = $db->select('SELECT * FROM posts WHERE id = ?;', [$id])->fetch();
+                $admin->remove_image($post['image']);
+                $request['image'] = $admin->saveImage($request['image'], 'images');
+            } else {
+                unset($request['image']);
+            }
+            $request = array_merge($request, ['user_id' => 1]);
+            $db->update('posts', $id, array_keys($request), $request);
+            $admin->redirect('admin/post');
+        } else {
+            $admin->redirect('admin/post');
+        }
     }
 
     public function delete($id)
     {
         $db = new Database();
-        $db->delete('categories', $id);
+        $post = $db->select('SELECT * FROM posts WHERE id = ?;', [$id])->fetch();
         $admin = new Admin();
-        $admin->redirect('admin/category');
+        $admin->remove_image($post['image']);
+        $db->delete('posts', $id);
+        $admin->redirect('admin/post');
+    }
+
+    public function selected($id)
+    {
+        $db = new Database();
+        $post = $db->select('SELECT * FROM posts WHERE id = ?;', [$id])->fetch();
+        if ($post['selelcted'] == 1) {
+            $db->update('posts', $id, ['selelcted'], [2]);
+        } else {
+            $db->update('posts', $id, ['selelcted'], [1]);
+        }
+        $admin = new Admin();
+        $admin->redirect('admin/post');
+    }
+
+    public function breaking_news($id)
+    {
+        $db = new Database();
+        $post = $db->select('SELECT * FROM posts WHERE id = ?;', [$id])->fetch();
+        if ($post['breaking_news'] == 1) {
+            $db->update('posts', $id, ['breaking_news'], [2]);
+        } else {
+            $db->update('posts', $id, ['breaking_news'], [1]);
+        }
+        $admin = new Admin();
+        $admin->redirect('admin/post');
     }
 
 }
