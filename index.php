@@ -22,6 +22,7 @@ require_once 'activities/Admin/User.php';
 require_once 'activities/Admin/Admin.php';
 require_once 'activities/Admin/Comment.php';
 require_once 'activities/Admin/Menu.php';
+require_once 'activities/Admin/Setting.php';
 $db = new database\Database;
 
 
@@ -186,7 +187,8 @@ spl_autoload_register(function ($className) {
     include($path . $className . '.php');
 });
 
-function shamsi_date($date) {
+function shamsi_date($date)
+{
     return \Parsidev\Jalali\jDate::forge($date)->format('datetime');
 }
 
@@ -246,6 +248,13 @@ uri('admin/menu/store', 'Admin\Menu', 'store', 'POST');
 uri('admin/menu/edit/{id}', 'Admin\Menu', 'edit');
 uri('admin/menu/update/{id}', 'Admin\Menu', 'update', 'POST');
 uri('admin/menu/delete/{id}', 'Admin\Menu', 'delete');
+
+
+
+//web setting
+uri('admin/setting', 'Admin\Setting', 'index');
+uri('admin/setting/edit/{id}', 'Admin\Setting', 'edit');
+uri('admin/setting/update/{id}', 'Admin\Setting', 'update', 'POST');
 
 
 
