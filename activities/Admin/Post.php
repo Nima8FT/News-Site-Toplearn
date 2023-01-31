@@ -12,7 +12,7 @@ class Post
     public function index()
     {
         $db = new Database();
-        $posts = $db->select('SELECT * FROM posts ORDER BY `id` DESC');
+        $posts = $db->select('SELECT posts.*,categories.name AS category_name , users.email AS email FROM posts LEFT JOIN categories ON posts.cat_id = categories.id LEFT JOIN users ON posts.user_id = users.id ORDER BY `id` DESC');
         require_once(BASE_PATH . '/template/admin/posts/index.php');
 
     }

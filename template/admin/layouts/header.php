@@ -47,7 +47,7 @@
                 <a class="text-decoration-none d-block py-1 px-2 mt-1" href="<?= url('admin/banner') ?>"><i class="fas fa-image"></i> Banner</a>
                 <a class="text-decoration-none d-block py-1 px-2 mt-1" href=""><i class="fas fa-comments"></i> Comment</a>
                 <a class="text-decoration-none d-block py-1 px-2 mt-1" href=""><i class="fas fa-bars"></i> Menus</a>
-                <a class="text-decoration-none d-block py-1 px-2 mt-1" href=""><i class="fas fa-users"></i> User</a>
+                <a class="text-decoration-none d-block py-1 px-2 mt-1" href="<?= url('admin/user') ?>"><i class="fas fa-users"></i> User</a>
                 <a class="text-decoration-none d-block py-1 px-2 mt-1" href=""><i class=" fas fa-tools"></i> Web Setting</a>
             </nav>
 

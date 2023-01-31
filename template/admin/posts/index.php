@@ -44,10 +44,10 @@ require_once(BASE_PATH . '/template/admin/layouts/header.php');
                         <?= $post['selelcted'] == 1 ? '<span class="badge badge-dark">#editor_selected</span>' : '' ?>
                     </td>
                     <td>
-                        <?= $post['user_id'] ?>
+                        <?= $post['email'] ?>
                     </td>
                     <td>
-                        <?= $post['cat_id'] ?>
+                        <?= $post['category_name'] ?>
                     </td>
                     <td><img style="width: 80px;" src="<?= asset($post['image']) ?>" alt=""></td>
                     <td style="width: 25rem;">

@@ -22,6 +22,9 @@
                      enabled: true
                 }
             },
+            timePicker: {
+                enabled: true,
+            },
             altField: '#published_at'
         })
     });
