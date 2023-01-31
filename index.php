@@ -20,6 +20,7 @@ require_once 'activities/Admin/Post.php';
 require_once 'activities/Admin/Banner.php';
 require_once 'activities/Admin/User.php';
 require_once 'activities/Admin/Admin.php';
+require_once 'activities/Admin/Comment.php';
 $db = new database\Database;
 
 
@@ -229,6 +230,12 @@ uri('admin/user/edit/{id}', 'Admin\User', 'edit');
 uri('admin/user/update/{id}', 'Admin\User', 'update', 'POST');
 uri('admin/user/delete/{id}', 'Admin\User', 'delete');
 uri('admin/user/premission/{id}', 'Admin\User', 'premission');
+
+
+
+//comment
+uri('admin/comment', 'Admin\Comment', 'index');
+uri('admin/comment/change/{id}', 'Admin\Comment', 'change');
 
 
 
