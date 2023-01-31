@@ -27,18 +27,21 @@ class User
     {
         $db = new Database();
         $admin = new Admin();
+        $request = ['username' => $request['username'], 'premission' => $request['premission']];
         $db->update('users', $id, array_keys($request), $request);
         $admin->redirect('admin/user');
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $db = new Database();
         $db->delete('users', $id);
         $admin = new Admin();
         $admin->redirect('admin/user');
     }
 
-    public function premission($id) {
+    public function premission($id)
+    {
         $db = new Database();
         $user = $db->select('SELECT * FROM users WHERE id = ?;', [$id])->fetch();
         if ($user['permission'] == 'user') {
