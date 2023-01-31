@@ -38,7 +38,7 @@ require_once(BASE_PATH . '/template/admin/layouts/header.php');
                         <?= $user['permission'] ?>
                     </td>
                     <td>
-                        <?= $user['created_at'] ?>
+                        <?= shamsi_date($user['created_at']) ?>
                     </td>
                     <td>
                         <a role="button" class="btn btn-sm btn-success text-white"

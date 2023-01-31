@@ -177,6 +177,19 @@ function dd($var)
 }
 
 
+//use shamsi date
+spl_autoload_register(function ($className) {
+    $path = BASE_PATH . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR;
+    $className = str_replace('\\', DIRECTORY_SEPARATOR, $className);
+    include($path . $className . '.php');
+});
+
+function shamsi_date($date) {
+    return \Parsidev\Jalali\jDate::forge($date)->format('datetime');
+}
+
+
+
 //category
 //show one row
 // uri('admin/category/show/{id}', 'Admin\Category', 'show');
@@ -216,6 +229,7 @@ uri('admin/user/edit/{id}', 'Admin\User', 'edit');
 uri('admin/user/update/{id}', 'Admin\User', 'update', 'POST');
 uri('admin/user/delete/{id}', 'Admin\User', 'delete');
 uri('admin/user/premission/{id}', 'Admin\User', 'premission');
+
 
 
 
