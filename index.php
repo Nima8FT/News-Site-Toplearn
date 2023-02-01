@@ -14,6 +14,17 @@ define('DB_NAME', 'newsSiteToplearn');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
 
+
+//mails
+define('MAIL_HOST', 'smtp.gmail.com');
+define('SMTP_AUTH', true);
+define('MAIL_USERNAME', 'nima_8a@yahoo.com');
+define('MAIL_PASSWORD', '09138014541');
+define('MAIL_PORT', 587);
+define('SENDER_MAIL', 'nima_8a@yahoo.com');
+define('SENDER_NAME', 'Nima');
+
+
 require_once 'database/database.php';
 require_once 'activities/Admin/Category.php';
 require_once 'activities/Admin/Post.php';
@@ -23,6 +34,7 @@ require_once 'activities/Admin/Admin.php';
 require_once 'activities/Admin/Comment.php';
 require_once 'activities/Admin/Menu.php';
 require_once 'activities/Admin/Setting.php';
+require_once 'activities/Auth/Auth.php';
 $db = new database\Database;
 
 
@@ -255,6 +267,12 @@ uri('admin/menu/delete/{id}', 'Admin\Menu', 'delete');
 uri('admin/setting', 'Admin\Setting', 'index');
 uri('admin/setting/edit/{id}', 'Admin\Setting', 'edit');
 uri('admin/setting/update/{id}', 'Admin\Setting', 'update', 'POST');
+
+
+//auth
+uri('register', 'Auth\Auth', 'register');
+uri('register/store', 'Auth\Auth', 'register_store', 'POST');
+uri('activation/store/{verify_token}', 'Auth\Auth', 'activation', 'POST');
 
 
 
