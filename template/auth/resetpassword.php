@@ -7,37 +7,18 @@
                 <img src="<?= asset('public/assets/images/img-01.png') ?>" alt="IMG">
             </div>
 
-            <form method="post" action="<?= url('register/store') ?>" class="login100-form validate-form">
+            <form method="post" action="<?= url('reset-password/' . $forgot_token) ?>" class="login100-form validate-form">
                 <span class="login100-form-title">
-                    Register
+                    Reset Password
                 </span>
 
                 <?php
-                $message = flash('register_error');
+                $message = flash('reset_error');
                 if (!empty($message)) {
                     echo '<div class="mb-2 alert alert-danger"> <small class="form-text text-danger">' . $message . '</small> </div>';
                 }
                 ?>
 
-
-
-
-
-                <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                    <input class="input100" type="text" name="username" placeholder="Username">
-                    <span class="focus-input100"></span>
-                    <span class="symbol-input100">
-                        <i class="fa fa-user" aria-hidden="true"></i>
-                    </span>
-                </div>
-
-                <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                    <input class="input100" type="text" name="email" placeholder="Email">
-                    <span class="focus-input100"></span>
-                    <span class="symbol-input100">
-                        <i class="fa fa-envelope" aria-hidden="true"></i>
-                    </span>
-                </div>
 
                 <div class="wrap-input100 validate-input" data-validate="Password is required">
                     <input class="input100" type="password" name="password" placeholder="Password">
@@ -49,7 +30,7 @@
 
                 <div class="container-login100-form-btn">
                     <button type="submit" class="login100-form-btn">
-                        Register
+                        Send
                     </button>
                 </div>
 
@@ -63,7 +44,7 @@
                 </div>
 
                 <div class="text-center p-t-136">
-                    <a class="txt2" href="<?= url('login') ?>">
+                    <a class="txt2" href="#">
                         Login your Account
                         <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
                     </a>

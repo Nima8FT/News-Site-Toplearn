@@ -3,11 +3,19 @@
 namespace Admin;
 
 use Admin\Admin;
+use Auth\Auth;
 use database\Database;
 
 // class Category extends Admin
 class Banner
 {
+
+    
+    // function __construct()
+    // {
+    //     $auth = new Auth();
+    //     $auth->check_admin();
+    // }
 
     public function index()
     {

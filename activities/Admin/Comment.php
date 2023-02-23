@@ -4,10 +4,17 @@ namespace Admin;
 
 use Admin\Admin;
 use database\Database;
+use Auth\Auth;
 
 // class Category extends Admin
 class Comment
 {
+
+    // function __construct()
+    // {
+    //     $auth = new Auth();
+    //     $auth->check_admin();
+    // }
 
     public function index()
     {

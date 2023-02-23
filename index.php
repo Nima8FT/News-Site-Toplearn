@@ -1,5 +1,6 @@
 <?php
 
+use Auth\Auth;
 
 //session start
 session_start();
@@ -19,7 +20,7 @@ define('DB_PASSWORD', '');
 define('MAIL_HOST', 'smtp.gmail.com');
 define('SMTP_AUTH', true);
 define('MAIL_USERNAME', 'nima_8a@yahoo.com');
-define('MAIL_PASSWORD', '09138014541');
+define('MAIL_PASSWORD', 'hbylvjuymhbbfnhj');
 define('MAIL_PORT', 587);
 define('SENDER_MAIL', 'nima_8a@yahoo.com');
 define('SENDER_NAME', 'Nima');
@@ -273,6 +274,13 @@ uri('admin/setting/update/{id}', 'Admin\Setting', 'update', 'POST');
 uri('register', 'Auth\Auth', 'register');
 uri('register/store', 'Auth\Auth', 'register_store', 'POST');
 uri('activation/store/{verify_token}', 'Auth\Auth', 'activation', 'POST');
+uri('login', 'Auth\Auth', 'login');
+uri('check_login', 'Auth\Auth', 'check_login', 'POST');
+uri('logout', 'Auth\Auth', 'logout');
+uri('forgot', 'Auth\Auth', 'forgot');
+uri('forgot_request', 'Auth\Auth', 'forgot_request', 'POST');
+uri('reset-password-form/{forgot_token}', 'Auth\Auth', 'reset_password_view');
+uri('reset-password/{forgot_token}', 'Auth\Auth', 'reset_password','POST');
 
 
 
