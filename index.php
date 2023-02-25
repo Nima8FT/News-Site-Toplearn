@@ -27,6 +27,7 @@ define('SENDER_NAME', 'Nima');
 
 
 require_once 'database/database.php';
+require_once 'activities/Admin/Dashboard.php';
 require_once 'activities/Admin/Category.php';
 require_once 'activities/Admin/Post.php';
 require_once 'activities/Admin/Banner.php';
@@ -204,6 +205,12 @@ function shamsi_date($date)
 {
     return \Parsidev\Jalali\jDate::forge($date)->format('datetime');
 }
+
+
+
+
+//dashbord
+uri('admin','Admin\Dashboard','index');
 
 
 
