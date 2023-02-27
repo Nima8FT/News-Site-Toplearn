@@ -37,6 +37,7 @@ require_once 'activities/Admin/Comment.php';
 require_once 'activities/Admin/Menu.php';
 require_once 'activities/Admin/Setting.php';
 require_once 'activities/Auth/Auth.php';
+require_once 'activities/App/Home.php';
 $db = new database\Database;
 
 
@@ -247,6 +248,7 @@ uri('admin/banner/update/{id}', 'Admin\Banner', 'update', 'POST');
 uri('admin/banner/delete/{id}', 'Admin\Banner', 'delete');
 
 
+
 //users
 uri('admin/user', 'Admin\User', 'index');
 uri('admin/user/edit/{id}', 'Admin\User', 'edit');
@@ -277,6 +279,7 @@ uri('admin/setting/edit/{id}', 'Admin\Setting', 'edit');
 uri('admin/setting/update/{id}', 'Admin\Setting', 'update', 'POST');
 
 
+
 //auth
 uri('register', 'Auth\Auth', 'register');
 uri('register/store', 'Auth\Auth', 'register_store', 'POST');
@@ -288,6 +291,15 @@ uri('forgot', 'Auth\Auth', 'forgot');
 uri('forgot_request', 'Auth\Auth', 'forgot_request', 'POST');
 uri('reset-password-form/{forgot_token}', 'Auth\Auth', 'reset_password_view');
 uri('reset-password/{forgot_token}', 'Auth\Auth', 'reset_password','POST');
+
+
+
+//app
+uri('/','App\Home' , 'index');
+uri('/home','App\Home' , 'index');
+uri('/show_post/{id}','App\Home' , 'show');
+uri('/show_category/{id}','App\Home' , 'category');
+uri('/comment_store','App\Home' , 'comment_store','POST');
 
 
 
