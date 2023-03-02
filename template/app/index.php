@@ -1,4 +1,8 @@
-<?php require_once(BASE_PATH . '/template/app/layouts/header.php') ?>
+<?php
+
+use Parsidev\Jalali\jDate;
+
+ require_once(BASE_PATH . '/template/app/layouts/header.php') ?>
 
 <div class="site-main-container">
     <!-- Start top-post Area -->
@@ -6,62 +10,82 @@
         <div class="container no-padding">
             <div class="row small-gutters">
                 <div class="col-lg-8 top-post-left">
-                    <div class="feature-image-thumb relative">
-                        <div class="overlay overlay-bg"></div>
-                        <img class="img-fluid" src="<?= asset($top_selected_post[0]['image']) ?>" alt="">
-                    </div>
-                    <div class="top-post-details">
-                        <ul class="tags">
-                            <li><a href="#">دسته بندی</a></li>
-                        </ul>
-                        <a href="image-post.html">
-                            <h3>عنوان خبر</h3>
-                        </a>
-                        <ul class="meta">
-                            <li><a href="#"><span class="lnr lnr-user"></span>ادمین</a></li>
-                            <li><a href="#">۱۳۳۹/۲/۴<span class="lnr lnr-calendar-full"></span></a></li>
-                            <li><a href="#">۵<span class="lnr lnr-bubble"></span></a></li>
-                        </ul>
-                    </div>
+
+                    <?php if (isset($top_selected_post[0])) { ?>
+
+                        <div class="feature-image-thumb relative">
+                            <div class="overlay overlay-bg"></div>
+                            <img class="img-fluid" src="<?= asset($top_selected_post[0]['image']) ?>" alt="">
+                        </div>
+                        <div class="top-post-details">
+                            <ul class="tags">
+                                <li><a href="#"><?= $top_selected_post[0]['category'] ?></a></li>
+                            </ul>
+                            <a href="image-post.html">
+                                <h3><?= $top_selected_post[0]['title'] ?></h3>
+                            </a>
+                            <ul class="meta">
+                                <li><a href="#"><span class="lnr lnr-user"></span><?= $top_selected_post[0]['username'] ?></a></li>
+                                <li><a href="#"><?= shamsi_date($top_selected_post[0]['created_at']) ?><span class="lnr lnr-calendar-full"></span></a></li>
+                                <li><a href="#"><?= $top_selected_post[0]['comments_count'] ?><span class="lnr lnr-bubble"></span></a></li>
+                            </ul>
+                        </div>
+
+                    <?php } ?>
+
                 </div>
+
                 <div class="col-lg-4 top-post-right">
-                    <div class="single-top-post">
-                        <div class="feature-image-thumb relative">
-                            <div class="overlay overlay-bg"></div>
-                            <img class="img-fluid" src="img/top-post2.jpg" alt="">
-                        </div>
-                        <div class="top-post-details">
-                            <ul class="tags">
-                                <li><a href="#">دسته بندی</a></li>
-                            </ul>
-                            <a href="image-post.html">
-                                <h4>عنوان</h4>
-                            </a>
-                            <ul class="meta">
-                                <li><a href="#"><span class="lnr lnr-user"></span>ادمین</a></li>
-                                <li><a href="#">۱۳۳۹/۲/۴<span class="lnr lnr-calendar-full"></span></a></li>
-                                <li><a href="#"> ۱<span class="lnr lnr-bubble"></span></a></li>
-                            </ul>
-                        </div>
+
+                    <?php if (isset($top_selected_post[1])) { ?>
+
+                        <div class="single-top-post">
+                            <div class="feature-image-thumb relative">
+                                <div class="overlay overlay-bg"></div>
+                                <img class="img-fluid" src="<?= asset($top_selected_post[1]['image']) ?>" alt="">
+                            </div>
+                            <div class="top-post-details">
+                                <ul class="tags">
+                                    <li><a href="#"><?= $top_selected_post[1]['category'] ?></a></li>
+                                </ul>
+                                <a href="image-post.html">
+                                    <h4><?= $top_selected_post[1]['title'] ?></h4>
+                                </a>
+                                <ul class="meta">
+                                    <li><a href="#"><span class="lnr lnr-user"></span><?= $top_selected_post[1]['username'] ?></a></li>
+                                    <li><a href="#"><?= shamsi_date($top_selected_post[1]['created_at']) ?><span class="lnr lnr-calendar-full"></span></a></li>
+                                    <li><a href="#"><?= $top_selected_post[1]['comments_count'] ?><span class="lnr lnr-bubble"></span></a></li>
+                                </ul>
+                            </div>
+
+                        <?php } ?>
+
                     </div>
+
                     <div class="single-top-post mt-10">
-                        <div class="feature-image-thumb relative">
-                            <div class="overlay overlay-bg"></div>
-                            <img class="img-fluid" src="img/top-post3.jpg" alt="">
-                        </div>
-                        <div class="top-post-details">
-                            <ul class="tags">
-                                <li><a href="#">دسته بندی</a></li>
-                            </ul>
-                            <a href="image-post.html">
-                                <h4>عنوان</h4>
-                            </a>
-                            <ul class="meta">
-                                <li><a href="#"><span class="lnr lnr-user"></span>ادمین</a></li>
-                                <li><a href="#">۱۳۳۹/۲/۴<span class="lnr lnr-calendar-full"></span></a></li>
-                                <li><a href="#">۵<span class="lnr lnr-bubble"></span></a></li>
-                            </ul>
-                        </div>
+
+                        <?php if (isset($top_selected_post[2])) { ?>
+
+                            <div class="feature-image-thumb relative">
+                                <div class="overlay overlay-bg"></div>
+                                <img class="img-fluid" src="<?= asset($top_selected_post[2]['image']) ?>" alt="">
+                            </div>
+                            <div class="top-post-details">
+                                <ul class="tags">
+                                    <li><a href="#"><?= $top_selected_post[2]['category'] ?></a></li>
+                                </ul>
+                                <a href="image-post.html">
+                                    <h4><?= $top_selected_post[2]['title'] ?></h4>
+                                </a>
+                                <ul class="meta">
+                                    <li><a href="#"><span class="lnr lnr-user"></span><?= $top_selected_post[2]['username'] ?></a></li>
+                                    <li><a href="#"><?= shamsi_date($top_selected_post[2]['created_at']) ?><span class="lnr lnr-calendar-full"></span></a></li>
+                                    <li><a href="#"><?= $top_selected_post[2]['comments_count'] ?><span class="lnr lnr-bubble"></span></a></li>
+                                </ul>
+                            </div>
+
+                        <?php } ?>
+
                     </div>
                 </div>
                 <div class="col-lg-12">
